@@ -1,24 +1,28 @@
 # get-twitter-media
 
+This code allows you to get images that a favorite twitter's user uploads.
+
 ## Usage
 
-### Write keys in `main.js`
+### Write keys in `config.json`
 
-```javascript
-const twitter = new Twitter({
-	consumer_key: '',
-	consumer_secret: '',
-	access_token_key: '',
-	access_token_secret: ''
-});
+```json
+{
+	"consumer_key": "XXXX",
+	"consumer_secret": "XXXX",
+	"access_token_key": "XXXX",
+	"access_token_secret": "XXXX"
+}
 ```
 
 ### Run
 
-e.g.) `node main.js iRis_s_yu`
+```
+npm start ${screen_name}
+```
 
-`iRis_s_yu` is screen name of twitter that user favorites.
+`${screen_name}` is the screen name of your favorite twitter's user.
 
 ## Result
 
-![セリコ](result.png)
+![00](00.png)

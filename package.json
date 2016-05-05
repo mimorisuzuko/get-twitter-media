@@ -1,18 +1,26 @@
 {
   "name": "get-twitter-media",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimorisuzuko/get-twitter-media.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Hiroki Usuba <hrky0206@gmail.com> (http://mimorisuzuko.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mimorisuzuko/get-twitter-media/issues"
+  },
+  "homepage": "https://github.com/mimorisuzuko/get-twitter-media#readme",
   "dependencies": {
     "co": "^4.6.0",
-    "prominence": "^0.2.0",
-    "request-promise": "^2.0.0",
+    "request-promise": "^3.0.0",
     "twitter": "^1.2.5"
   }
 }
