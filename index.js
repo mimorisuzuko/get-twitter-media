@@ -21,7 +21,7 @@ const getUserTimeline = (option) => {
 	return new Promise((resolve, reject) => {
 		twitter.get('statuses/user_timeline', option, (err, tweets, res) => {
 			if (err) {
-				console(err);
+				console.log(err);
 			}
 			resolve(tweets);
 		});
@@ -29,7 +29,7 @@ const getUserTimeline = (option) => {
 };
 
 const option = {
-	screen_name: 'iRis_s_yu',
+	screen_name: name,
 	count: 200
 };
 
@@ -45,13 +45,12 @@ co(function* () {
 		if (tweets.length === 0) {
 			break;
 		}
-		console.log(tweets.length);
-		for (let tweet of tweets) {
+		for (const tweet of tweets) {
 			option.max_id = tweet.id_str;
 			if (tweet.hasOwnProperty('retweeted_status') || !tweet.entities.hasOwnProperty('media')) {
 				continue;
 			}
-			for (let media of tweet.entities.media) {
+			for (const media of tweet.extended_entities.media) {
 				const url = media.media_url;
 				const b = yield rp(url, { encoding: null });
 				fs.writeFileSync(`${name}/${url.split('/').pop()}`, b, 'binary');
