@@ -1,8 +1,8 @@
 {
-  "name": "get-twitter-medias",
+  "name": "get-twitter-media",
   "version": "0.0.1",
   "description": "Get images that a favorite twitter's user uploads",
-  "main": "get-twitter-medias",
+  "main": "get-twitter-media",
   "scripts": {},
   "keywords": [],
   "author": "Hiroki Usuba <hrky0206@gmail.com> (http://mimorisuzuko.github.io/)",

@@ -64,9 +64,9 @@ if (screenName) {
 				}
 
 				if (tweet.hasOwnProperty('retweeted_status') || !entities) { continue; }
-				const { media: medias } = entities;
-				for (const media of medias) {
-					const { media_url: url } = media;
+				const { media: children } = entities;
+				for (const child of children) {
+					const { media_url: url } = child;
 					const b = await rp(url, { encoding: null });
 
 					await fse.writeFile(libpath.join(path, libpath.basename(url)), b, 'binary');
