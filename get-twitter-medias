@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+
+const Twitter = require('twitter');
+const config = require('config');
+const fse = require('fs-extra');
+const libpath = require('path');
+const rp = require('request-promise');
+
+const twitter = new Twitter({
+	consumer_key: config.get('consumer_key'),
+	consumer_secret: config.get('consumer_secret'),
+	access_token_key: config.get('access_token_key'),
+	access_token_secret: config.get('access_token_secret')
+});
+const { argv: [, , screenName] } = process;
+const options = {
+	screen_name: screenName,
+	count: 200
+};
+let path = __dirname;
+let pid;
+
+/**
+ * @param {{}} options
+ * @returns {{}[]}
+ */
+const getUserTimeline = (options) => {
+	return new Promise((resolve, reject) => {
+		twitter.get('statuses/user_timeline', options, (err, tweets) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(tweets);
+			}
+		});
+	});
+};
+
+if (screenName) {
+	['images', screenName].forEach((dir) => {
+		path = libpath.join(path, dir);
+
+		if (!fse.existsSync(path)) {
+			fse.mkdirpSync(path);
+		}
+	});
+
+	(async () => {
+		loop: while (true) {
+			const tweets = await getUserTimeline(Object.assign({ max_id: pid }, options));
+			const { length } = tweets;
+			let i = pid ? 1 : 0;
+
+			if (i === 1 && length === 1) { break loop; }
+
+			for (; i < length; i += 1) {
+				const tweet = tweets[i];
+				const { id_str: id, extended_entities: entities } = tweet;
+
+				if (id === pid) {
+					break loop;
+				} else {
+					pid = id;
+				}
+
+				if (tweet.hasOwnProperty('retweeted_status') || !entities) { continue; }
+				const { media: medias } = entities;
+				for (const media of medias) {
+					const { media_url: url } = media;
+					const b = await rp(url, { encoding: null });
+
+					await fse.writeFile(libpath.join(path, libpath.basename(url)), b, 'binary');
+					console.log(`😄  Get ${url}`);
+				}
+			}
+		}
+		
+		console.log('✨  Done');
+	})().catch(console.error);
+} else {
+	console.log('You should execute this like `./get-twitter-medias screen_name`');
+}

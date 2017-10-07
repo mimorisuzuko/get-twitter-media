@@ -1,10 +1,10 @@
 # get-twitter-media
 
-This code allows you to get images that a favorite twitter's user uploads.
+Get images that a favorite twitter's user uploads
 
 ## Usage
 
-### Write keys in `config.json`
+Write keys in 'config/default.json';
 
 ```json
 {
@@ -15,14 +15,11 @@ This code allows you to get images that a favorite twitter's user uploads.
 }
 ```
 
-### Run
-
+```zsh
+yarn
+./get-twitter-medias screen_name
 ```
-npm start ${screen_name}
-```
 
-`${screen_name}` is the screen name of your favorite twitter's user.
-
-## Result
+Save images in `images/screen_name`;
 
 ![00](00.png)

@@ -1,26 +1,17 @@
 {
-  "name": "get-twitter-media",
+  "name": "get-twitter-medias",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mimorisuzuko/get-twitter-media.git"
-  },
+  "description": "Get images that a favorite twitter's user uploads",
+  "main": "get-twitter-medias",
+  "scripts": {},
   "keywords": [],
   "author": "Hiroki Usuba <hrky0206@gmail.com> (http://mimorisuzuko.github.io/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mimorisuzuko/get-twitter-media/issues"
-  },
-  "homepage": "https://github.com/mimorisuzuko/get-twitter-media#readme",
   "dependencies": {
-    "co": "^4.6.0",
-    "request-promise": "^3.0.0",
-    "twitter": "^1.2.5"
+    "config": "^1.26.2",
+    "fs-extra": "^4.0.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "twitter": "^1.7.1"
   }
 }
